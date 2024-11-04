@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "*.embeddedhtml": "html",
+    "httpparser.h": "c",
+    "*.inc": "cpp",
+    "filesystem": "cpp",
+    "route.h": "c",
+    "httpserver.h": "c"
+  }
+}
