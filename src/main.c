@@ -11,8 +11,7 @@ void hello(Request* req, Response* res) {
 
 route(POST, "/submit", submitForm);
 void submitForm(Request* req, Response* res) {
-    const char *response = "HTTP/1.1 200 OK\r\nContent-Length: 14\r\n\r\nForm submitted!";
-    send(res->client_socket, response, strlen(response), 0);
+    SEND_TEXT_RESPONSE(res, 200, "yo yo yo")
 }
 
 int main() {

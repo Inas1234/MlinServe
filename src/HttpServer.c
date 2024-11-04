@@ -67,11 +67,11 @@ void HttpServer_handleClient(HttpServer* server) {
 
     Request *request = HttpParser_parseRequest(buffer);
     if (request) {
-        Response res = { new_socket };
+        Response *res = Response_init(new_socket);
         
         RouteHandler handler = Route_findHandler(request->method, request->path);
         if (handler) {
-            handler(request, &res);  
+            handler(request, res);  
         } else {
             const char *not_found = "HTTP/1.1 404 Not Found\r\nContent-Length: 13\r\n\r\n404 Not Found";
             send(new_socket, not_found, strlen(not_found), 0);
