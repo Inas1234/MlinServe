@@ -69,7 +69,7 @@ void HttpServer_handleClient(HttpServer* server) {
     if (request) {
         Response *res = Response_init(new_socket);
         
-        RouteHandler handler = Route_findHandler(request->method, request->path);
+        RouteHandler handler = Route_findHandler(request->method, request->path, request, res);
         if (handler) {
             handler(request, res);  
         } else {
