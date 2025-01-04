@@ -35,6 +35,18 @@ typedef struct {
     Response_send(res);                                       \
     Response_free(res);
 
+#define SEND_ERROR_RESPONSE(res, status_code, error_message) \
+    Response_setStatus(res, status_code);                   \
+    Response_addHeader(res, "Content-Type: text/plain");     \
+    Response_setBody(res, error_message);                   \
+    Response_send(res);                                     \
+    Response_free(res);
+
+#define HTTP_OK 200
+#define HTTP_BAD_REQUEST 400
+#define HTTP_NOT_FOUND 404
+#define HTTP_INTERNAL_SERVER_ERROR 500
+
 
 Request* HttpParser_parseRequest(const char *raw_request);
 
@@ -51,5 +63,7 @@ void Response_setBody(Response *response, const char *body);
 void Response_send(Response *response);
 
 void Response_free(Response *response);
+
+int errorHandlerMiddleware(Request* req, Response* res);
 
 #endif 

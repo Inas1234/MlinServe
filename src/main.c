@@ -13,8 +13,15 @@ int logRequestMiddleware(Request* req, Response* res) {
 
 route(GET, "/login", hello, add_middleware(middleware, logRequestMiddleware));
 void hello(Request* req, Response* res) {
-    SEND_TEXT_RESPONSE(res, 200, "DRUZEE");
+    if (!req->headers || !strstr(req->headers, "Authorization")) {
+        SEND_ERROR_RESPONSE(res, 401, "Unauthorized: Missing Authorization Header");
+        return;
+    }
+
+    SEND_TEXT_RESPONSE(res, HTTP_OK, "DRUZEE");
 }
+
+
 
 
 int corsMiddlewareWrapper(Request* req, Response* res) {
@@ -30,7 +37,7 @@ int main() {
     globalCorsConfig = CorsConfig_init("*", "GET, POST, OPTIONS", "Content-Type, Authorization", 1);
     add_middleware(middleware, corsMiddlewareWrapper);
 
-
+    add_middleware(middleware, errorHandlerMiddleware);
     HttpServer_start(server);
 
     CorseConfig_free(globalCorsConfig);

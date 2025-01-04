@@ -85,3 +85,11 @@ void Response_free(Response *response) {
     free(response);
 }
 
+int errorHandlerMiddleware(Request* req, Response* res) {
+    if (res->status_code == 0) {
+        SEND_ERROR_RESPONSE(res, 404, "404 Not Found");
+        return 1; 
+    }
+
+    return 0;
+}
