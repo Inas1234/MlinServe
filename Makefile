@@ -1,6 +1,6 @@
 CXX = gcc
 FILES = ./src/main.c -o main
-LINKERS = ./src/HttpServer.c ./src/HttpParser.c ./src/Route.c ./src/Middleware.c ./src/Cors.c
+LINKERS = ./src/HttpServer.c ./src/HttpParser.c ./src/Route.c ./src/Middleware.c ./src/Cors.c ./src/Env.c
 
 all:
 	$(CXX) $(LINKERS) $(FILES)

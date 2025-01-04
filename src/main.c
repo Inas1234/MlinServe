@@ -1,6 +1,7 @@
 #include "../include/HttpServer.h"
 #include "../include/Route.h"
 #include "../include/Cors.h"
+#include "../include/Env.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -30,7 +31,11 @@ int corsMiddlewareWrapper(Request* req, Response* res) {
 
 
 int main() {
-    HttpServer* server = HttpServer_init(8080);
+    load_env();
+
+    const char* port_str = get_env("SERVER_PORT", "8080");
+
+    HttpServer* server = HttpServer_init(atoi(port_str));
     Middleware* middleware = create_middleware(10); 
 
 
