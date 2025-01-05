@@ -3,7 +3,8 @@
         {
             "name": "Mac",
             "includePath": [
-                "${default}"
+                "${default}",
+                "/opt/homebrew/Cellar/postgresql@14/14.15/include/postgresql@14"
             ],
             "defines": [],
             "macFrameworkPath": [

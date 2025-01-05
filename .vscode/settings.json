@@ -5,6 +5,8 @@
     "*.inc": "cpp",
     "filesystem": "cpp",
     "route.h": "c",
-    "httpserver.h": "c"
+    "httpserver.h": "c",
+    "env.h": "c",
+    "pgdb.h": "c"
   }
 }
